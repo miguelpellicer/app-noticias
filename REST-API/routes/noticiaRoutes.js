@@ -8,7 +8,8 @@ const noticiaController = require('../controllers/noticiaController');
 router.get('/', noticiaController.getAllNoticias);
 router.get('/:id', noticiaController.getNoticia);
 router.post('/', subirImagen.single('imagen'), noticiaController.addNoticia);
-router.put('/:id', subirImagen.single('imagen'), noticiaController.updateNoticia);
+router.put('/:id', noticiaController.updateNoticia);
+router.put('/img/:id', subirImagen.single('imagen'), noticiaController.cambiarImg);
 router.delete('/:id', noticiaController.deleteNoticia);
 
 // SE CONFIGURA EL MULTER
