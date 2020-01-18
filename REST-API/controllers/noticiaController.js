@@ -12,7 +12,7 @@ async function getAllNoticias(req, res) {
     const noticias = await Noticia.find({});
 
     if (!noticias)
-        return res.status(404).send('No hay noticias')
+        return res.status(404).send('No hay noticias');
 
     res.status(200).send(noticias);
 }
