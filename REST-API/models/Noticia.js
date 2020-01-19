@@ -24,7 +24,7 @@ const noticiaSchema = Schema({
     },
     imagen: {
         type: String,
-        required: false,
+        required: true,
         default: 'images/sinImagen.png' //si no hay imagen se introducira por defecto la imagen de "imagen no disponible"
     }
 });

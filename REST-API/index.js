@@ -1,10 +1,9 @@
 // DECLARACIÓN DE VARIABLES (IMPORTS)
 const express = require('express');
-const mongoose = require('mongoose');
-const noticiaRoutes = require('routes/noticiaRoutes');
-
-// INICIALIZACIÓN DE EXPRESS
 const app = express();
+const mongoose = require('mongoose');
+const noticiaRoutes = require('./routes/noticiaRoutes');
+
 
 // CONEXIÓN A LA BD (mongoDB)
 mongoose.connect('mongodb+srv://app-noticias-api:xzlzXWgbIw3hU4qs@app-noticias-f2gik.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, () => console.log('Conectado a la BD'));

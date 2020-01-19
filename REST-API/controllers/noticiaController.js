@@ -8,6 +8,7 @@ const fs = require('fs');
  * @param req
  * @param res
  */
+
 async function getAllNoticias(req, res) {
     const noticias = await Noticia.find({});
 
@@ -41,9 +42,10 @@ async function getNoticia(req, res){
  * @param res
  */
 async function addNoticia(req, res){
-
     //se guarda la imagen en una variable
-    const imagen = req.file;
+    console.log(req.file);
+
+    /*const imagen = req.file;
     let noticia;
 
     if(!imagen){
@@ -68,7 +70,7 @@ async function addNoticia(req, res){
         res.status(200).send({id: noticiaGuardada._id});
     }catch (err) {
         res.status(500).send('Error al añadir la noticia')
-    }
+    }*/
 }
 
 /**
