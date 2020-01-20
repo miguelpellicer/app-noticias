@@ -35,6 +35,11 @@ const noticiaSchema = Schema({
         }],
         required: true,
         default: []
+    },
+    created_at: {
+        type: Date,
+        required: true,
+        default: new Date()
     }
 });
 

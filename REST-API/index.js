@@ -3,6 +3,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const noticiaRoutes = require('./routes/noticiaRoutes');
+const dotenv = require('dotenv');
+
+// SE CONFIGURAN LAS VARIABLES DE ENTORNO
+dotenv.config();
 
 // COSAS QUE ESPECIFICA LA DOCUMENTACION DE MONGOOSE QUE HAY QUE HACER
 mongoose.set('useNewUrlParser', true);
@@ -11,7 +15,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 // CONEXIÓN A LA BD (mongoDB)
-mongoose.connect('mongodb+srv://app-noticias-api:xzlzXWgbIw3hU4qs@app-noticias-f2gik.mongodb.net/test?retryWrites=true&w=majority', () => console.log('Conectado a la BD'));
+mongoose.connect(process.env.DB_CONNECT, () => console.log('Conectado a la BD'));
 
 
 // SE CONFIGURA EXPRESS

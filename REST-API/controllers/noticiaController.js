@@ -32,7 +32,8 @@ async function getNoticia(req, res){
         "resumen": noticia.resumen,
         "cuerpo": noticia.cuerpo,
         "imagen": noticia.imagen,
-        "comentarios": noticia.comentarios
+        "comentarios": noticia.comentarios,
+        "created_at" : noticia.created_at
     });
 }
 

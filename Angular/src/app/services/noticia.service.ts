@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Comentario} from "../../models/Comentario";
-import {Noticia} from "../../models/Noticia";
+import {HttpClient} from '@angular/common/http';
+import {Comentario} from '../../models/Comentario';
+import {Noticia} from '../../models/Noticia';
 
 @Injectable({
   providedIn: 'root'
 })
+
+/***
+ * EN ESTA CLASE SE GESTIONAN TODAS LAS POSIBLES PETICIONES A LA API
+ */
 export class NoticiaService {
 
   API_URI = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getNoticias(){
     return this.http.get(`${this.API_URI}/noticia`);

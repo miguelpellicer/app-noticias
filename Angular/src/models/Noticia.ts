@@ -6,4 +6,5 @@ export interface Noticia {
   resumen: string,
   cuerpo: string
   comentarios : [Comentario];
+  createdAt: Date;
 }
