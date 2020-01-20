@@ -4,9 +4,15 @@ const app = express();
 const mongoose = require('mongoose');
 const noticiaRoutes = require('./routes/noticiaRoutes');
 
+// COSAS QUE ESPECIFICA LA DOCUMENTACION DE MONGOOSE QUE HAY QUE HACER
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 // CONEXIÓN A LA BD (mongoDB)
-mongoose.connect('mongodb+srv://app-noticias-api:xzlzXWgbIw3hU4qs@app-noticias-f2gik.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, () => console.log('Conectado a la BD'));
+mongoose.connect('mongodb+srv://app-noticias-api:xzlzXWgbIw3hU4qs@app-noticias-f2gik.mongodb.net/test?retryWrites=true&w=majority', () => console.log('Conectado a la BD'));
+
 
 // SE CONFIGURA EXPRESS
 app.use(express.json());

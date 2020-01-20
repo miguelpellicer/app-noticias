@@ -1,7 +1,5 @@
 //DECLARACIÓN DE VARIABLES (IMPORTS)
 const Noticia = require('../models/Noticia');
-//fs es una clase de node que ayuda a la hora de tratar con ficheros, en este caso lo utilizare para eliminar imagenes
-const fs = require('fs');
 
 /**
  * Método que devuelve todas las noticias
@@ -24,15 +22,17 @@ async function getAllNoticias(req, res) {
  * @param res
  */
 async function getNoticia(req, res){
-    const noticia = await Noticia.findOne({_id: req.user});
+    noticia = await Noticia.findOne({_id: req.params.id});
     if (!noticia)
         return res.status(404).send('No se ha encontrado la noticia');
 
     res.status(200).send({
+        "_id": noticia._id,
         "titulo": noticia.titulo,
         "resumen": noticia.resumen,
         "cuerpo": noticia.cuerpo,
-        "imagen": noticia.imagen
+        "imagen": noticia.imagen,
+        "comentarios": noticia.comentarios
     });
 }
 
@@ -42,35 +42,21 @@ async function getNoticia(req, res){
  * @param res
  */
 async function addNoticia(req, res){
-    //se guarda la imagen en una variable
-    console.log(req.file);
 
-    /*const imagen = req.file;
-    let noticia;
-
-    if(!imagen){
-        //si la imagen no existe se crea una noticia sin imagen (se insertara la imagen por defecto automaticamente)
-        noticia = new Noticia({
-            titulo: req.body.titulo,
-            resumen: req.body.resumen,
-            cuerpo: req.body.cuerpo,
-        });
-
-    }else{
-        noticia = new Noticia({
-            titulo: req.body.titulo,
-            resumen: req.body.resumen,
-            cuerpo: req.body.cuerpo,
-            imagen: imagen.path
-        });
-    }
+    //Se crea la nueva noticia
+    noticia = new Noticia({
+        titulo: req.body.titulo,
+        resumen: req.body.resumen,
+        cuerpo: req.body.cuerpo,
+        imagen: req.body.imagen
+    });
 
     try{
         const noticiaGuardada =  await noticia.save();
         res.status(200).send({id: noticiaGuardada._id});
     }catch (err) {
         res.status(500).send('Error al añadir la noticia')
-    }*/
+    }
 }
 
 /**
@@ -79,41 +65,15 @@ async function addNoticia(req, res){
  * @param res
  */
 async function updateNoticia(req, res){
+    const noticiaId = req.params.id;
+    const update = req.body;
 
-    await Noticia.findByIdAndUpdate(req.params.id, req.body, (err, nuevaNoticia) => {
+    await Noticia.findByIdAndUpdate(noticiaId, update, (err, noticiaActualizada) => {
         if (err)
-             res.status(500).send('Error al actualizar la noticia');
-        else
-             res.status(200).send({noticia: nuevaNoticia});
+            return res.status(500).send(err);
+
+        res.status(200).send('okey makey');
     });
-
-}
-
-/**
- * Método que cambia la imagen de una noticia
- * @param req
- * @param res
- */
-async function cambiarImg(req, res){
-    const noticia = Noticia.findOne({_id: req.params.id});
-    if (!noticia){
-        return res.status(404).send('No se ha encontrado la noticia');
-    }
-
-    //se coge la nueva imagen
-    const imagen = req.file;
-    if(!imagen){
-        //si no es correcta se devuelve un codigo 415  (Unsupported Media Type)
-        return res.status(415).send('No puedes utilizar esta imagen');
-    }
-
-    if (noticia.imagen !== 'images/sinImagen.png')
-        //si la imagen anterior no es la por defecto se elimina del servidor
-        fs.unlinkSync(noticia.imagen);
-
-    //se actualiza la imagen
-    imagenActualizada = await Noticia.updateOne({_id: noticia._id}, {$set: {imagen: imagen.path}});
-    res.status(200).send('imagen actualiada con exito');
 }
 
 /**
@@ -122,20 +82,63 @@ async function cambiarImg(req, res){
  * @param res
  */
 async function deleteNoticia(req, res){
-    const noticia = Noticia.findOne({_id: req.params.id});
+    noticia = await Noticia.findOne({_id: req.params.id});
     if (!noticia)
         return res.status(404).send('No se ha encontrado la noticia');
 
-    if (noticia.imagen !== 'images/sinImagen.png')
-        //si la imagen de la noticia no es la por defecto se elimina del servidor
-        fs.unlinkSync(noticia.imagen);
-
-    await Noticia.remove(err => {
+    await noticia.deleteOne(err => {
         if (err)
             res.status(500).send('Error al eliminar la noticia');
         else
             res.status(200).send('Noticia eliminada con exito')
     });
+}
+
+/**
+ * Método que dado el id de una noticia añade un comentario
+ * @param req
+ * @param res
+ */
+async function addComentario(req, res){
+    noticia = await Noticia.findOne({_id: req.params.idnoticia});
+    if (!noticia)
+        return res.status(404).send('Esa noticia no existe');
+
+    const comentario = {
+        nombre : req.body.nombre,
+        contenido : req.body.contenido
+    };
+    let comentarios = noticia.comentarios;
+    comentarios.push(comentario);
+    comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
+    res.status(200).send('Comentario agregado con exito');
+
+
+}
+
+/**
+ * Método que dado los id de un comentario y de una noticia elimina ese comentario
+ * @param req
+ * @param res
+ */
+async function deleteComentario(req, res){
+    noticia = await Noticia.findOne({_id: req.params.idnoticia});
+    if (!noticia)
+        return res.status(404).send('Esa noticia no existe');
+
+    let comentarios = noticia.comentarios;
+
+    for (let c of comentarios){
+        //se encuentra el comentario y se elimina
+        if (req.params.idcomentario == c._id){
+            comentarios.splice( comentarios.indexOf(c), 1 );
+            break;
+        }
+    }
+    comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
+    res.status(200).send('Comentario eliminado con exito');
+
+
 }
 
 //Se exportan todos los metodos
@@ -145,5 +148,6 @@ module.exports = {
     addNoticia,
     updateNoticia,
     deleteNoticia,
-    cambiarImg
+    deleteComentario,
+    addComentario
 };

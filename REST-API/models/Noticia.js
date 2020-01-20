@@ -25,7 +25,16 @@ const noticiaSchema = Schema({
     imagen: {
         type: String,
         required: true,
-        default: 'images/sinImagen.png' //si no hay imagen se introducira por defecto la imagen de "imagen no disponible"
+        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imagen_no_disponible.svg/1024px-Imagen_no_disponible.svg.png'
+        //por defecto tiene la imagen "sin imagen"
+    },
+    comentarios : {
+        type: [{
+            nombre: String,
+            contenido: String
+        }],
+        required: true,
+        default: []
     }
 });
 
