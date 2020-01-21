@@ -1,10 +1,12 @@
 import {Comentario} from "./Comentario";
 
 export interface Noticia {
-  id: string,
-  title: string,
+  _id: string,
+  titulo: string,
   resumen: string,
-  cuerpo: string
-  comentarios : [Comentario];
-  createdAt: Date;
+  cuerpo: string,
+  imagen?: string,
+  autor: string,
+  comentarios?: [Comentario],
+  created_at: Date
 }

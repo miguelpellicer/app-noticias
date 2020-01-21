@@ -1,1 +1,32 @@
-<p>noticia-form works!</p>
+<div class="col-md-4 offset-md-2">
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <input type="text" name="titulo" placeholder="Título" [(ngModel)]="noticia.titulo" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <textarea name="resumen" placeholder="Resumen" [(ngModel)]="noticia.resumen" rows="2" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <textarea name="cuerpo" placeholder="Cuerpo" [(ngModel)]="noticia.cuerpo" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="url" name="imagen" placeholder="Imagen" [(ngModel)]="noticia.imagen" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="autor" placeholder="Autor" [(ngModel)]="noticia.autor" class="form-control">
+        </div>
+        <button class="btn btn-success btn-block" (click)="edit ? actualizarNoticia() : nuevaNoticia()"> GUARDAR </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="card card-body text-center">
+    <img class="card-img-top" [src]="noticia.imagen == '' ? './assets/images/imagen-no-disponible.png' : noticia.imagen">
+    <h2>{{ noticia.titulo == '' ? 'Titulo' : noticia.titulo }}</h2>
+    <h3>{{ noticia.resumen == '' ? 'Resumen' : noticia.resumen }}</h3>
+    <p>{{ noticia.cuerpo == '' ? 'Contenido' : noticia.cuerpo }}</p>
+  </div>
+</div>

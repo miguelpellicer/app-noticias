@@ -1,4 +1,4 @@
 export interface Comentario {
-  nombre: string,
-  contenido: string
+  nombre?: string,
+  contenido?: string
 }

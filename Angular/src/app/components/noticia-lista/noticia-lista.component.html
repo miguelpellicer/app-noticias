@@ -1,1 +1,15 @@
-<p>noticia-lista works!</p>
+<div class="col-md-4" *ngFor="let noticia of noticias">
+  <div class="card text-center">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">{{noticia.titulo}}
+      <button class="btn btn-danger" (click)="eliminarNoticia(noticia._id)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <img [src]="noticia.imagen" class="card-img-top">
+    <div class="card-body">
+      <h3>{{noticia.resumen}}</h3>
+      <p>{{noticias.cuerpo}}</p>
+      <a href="" class="btn btn-info btn-block" [routerLink]="['/noticias/edit',noticia._id]"> EDITAR </a>
+    </div>
+  </div>
+</div>

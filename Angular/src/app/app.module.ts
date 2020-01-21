@@ -7,6 +7,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { NoticiaListaComponent } from './components/noticia-lista/noticia-lista.component';
 import { NoticiaFormComponent } from './components/noticia-form/noticia-form.component';
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,11 +16,12 @@ import {HttpClientModule} from "@angular/common/http";
     NoticiaListaComponent,
     NoticiaFormComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

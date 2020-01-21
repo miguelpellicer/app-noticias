@@ -26,15 +26,7 @@ async function getNoticia(req, res){
     if (!noticia)
         return res.status(404).send('No se ha encontrado la noticia');
 
-    res.status(200).send({
-        "_id": noticia._id,
-        "titulo": noticia.titulo,
-        "resumen": noticia.resumen,
-        "cuerpo": noticia.cuerpo,
-        "imagen": noticia.imagen,
-        "comentarios": noticia.comentarios,
-        "created_at" : noticia.created_at
-    });
+    res.status(200).send(noticia);
 }
 
 /**
@@ -49,14 +41,15 @@ async function addNoticia(req, res){
         titulo: req.body.titulo,
         resumen: req.body.resumen,
         cuerpo: req.body.cuerpo,
-        imagen: req.body.imagen
+        imagen: req.body.imagen,
+        autor: req.body.autor
     });
 
     try{
         const noticiaGuardada =  await noticia.save();
         res.status(200).send({id: noticiaGuardada._id});
     }catch (err) {
-        res.status(500).send('Error al añadir la noticia')
+        res.status(500).send({message: 'Error al añadir la noticia'})
     }
 }
 
@@ -73,7 +66,7 @@ async function updateNoticia(req, res){
         if (err)
             return res.status(500).send(err);
 
-        res.status(200).send('okey makey');
+        res.status(200).send(noticiaActualizada);
     });
 }
 
@@ -85,13 +78,13 @@ async function updateNoticia(req, res){
 async function deleteNoticia(req, res){
     noticia = await Noticia.findOne({_id: req.params.id});
     if (!noticia)
-        return res.status(404).send('No se ha encontrado la noticia');
+        return res.status(404).send({message: 'No se ha encontrado la noticia'});
 
     await noticia.deleteOne(err => {
         if (err)
-            res.status(500).send('Error al eliminar la noticia');
+            res.status(500).send({message: 'Error al eliminar la noticia'});
         else
-            res.status(200).send('Noticia eliminada con exito')
+            res.status(200).send({message: 'Noticia eliminada con exito'})
     });
 }
 
@@ -103,7 +96,7 @@ async function deleteNoticia(req, res){
 async function addComentario(req, res){
     noticia = await Noticia.findOne({_id: req.params.idnoticia});
     if (!noticia)
-        return res.status(404).send('Esa noticia no existe');
+        return res.status(404).send({message: 'Esa noticia no existe'});
 
     const comentario = {
         nombre : req.body.nombre,
@@ -112,7 +105,7 @@ async function addComentario(req, res){
     let comentarios = noticia.comentarios;
     comentarios.push(comentario);
     comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
-    res.status(200).send('Comentario agregado con exito');
+    res.status(200).send({message: 'Comentario agregado con exito'});
 
 
 }
@@ -125,7 +118,7 @@ async function addComentario(req, res){
 async function deleteComentario(req, res){
     noticia = await Noticia.findOne({_id: req.params.idnoticia});
     if (!noticia)
-        return res.status(404).send('Esa noticia no existe');
+        return res.status(404).send({message: 'Esa noticia no existe'});
 
     let comentarios = noticia.comentarios;
 
@@ -137,7 +130,7 @@ async function deleteComentario(req, res){
         }
     }
     comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
-    res.status(200).send('Comentario eliminado con exito');
+    res.status(200).send({message: 'Comentario eliminado con exito'});
 
 
 }

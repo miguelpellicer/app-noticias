@@ -22,10 +22,14 @@ const noticiaSchema = Schema({
         required: true,
         min: 1
     },
+    autor: {
+        type: String,
+        required: true,
+    },
     imagen: {
         type: String,
         required: true,
-        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imagen_no_disponible.svg/1024px-Imagen_no_disponible.svg.png'
+        default: './assets/images/imagen-no-disponible.png'
         //por defecto tiene la imagen "sin imagen"
     },
     comentarios : {
