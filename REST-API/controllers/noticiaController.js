@@ -42,7 +42,8 @@ async function addNoticia(req, res){
         resumen: req.body.resumen,
         cuerpo: req.body.cuerpo,
         imagen: req.body.imagen,
-        autor: req.body.autor
+        autor: req.body.autor,
+        categoria: req.body.categoria
     });
 
     try{
@@ -100,6 +101,7 @@ async function addComentario(req, res){
 
     const comentario = {
         nombre : req.body.nombre,
+        correo: req.body.correo,
         contenido : req.body.contenido
     };
     let comentarios = noticia.comentarios;
@@ -110,30 +112,6 @@ async function addComentario(req, res){
 
 }
 
-/**
- * Método que dado los id de un comentario y de una noticia elimina ese comentario
- * @param req
- * @param res
- */
-async function deleteComentario(req, res){
-    noticia = await Noticia.findOne({_id: req.params.idnoticia});
-    if (!noticia)
-        return res.status(404).send({message: 'Esa noticia no existe'});
-
-    let comentarios = noticia.comentarios;
-
-    for (let c of comentarios){
-        //se encuentra el comentario y se elimina
-        if (req.params.idcomentario == c._id){
-            comentarios.splice( comentarios.indexOf(c), 1 );
-            break;
-        }
-    }
-    comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
-    res.status(200).send({message: 'Comentario eliminado con exito'});
-
-
-}
 
 //Se exportan todos los metodos
 module.exports = {
@@ -142,6 +120,5 @@ module.exports = {
     addNoticia,
     updateNoticia,
     deleteNoticia,
-    deleteComentario,
     addComentario
 };

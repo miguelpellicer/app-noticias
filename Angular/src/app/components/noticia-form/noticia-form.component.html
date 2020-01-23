@@ -1,6 +1,7 @@
 <div class="col-md-4 offset-md-2">
   <div class="card">
     <div class="card-body">
+      <!-- formulario de editar noticias -->
       <form>
         <div class="form-group">
           <input type="text" name="titulo" placeholder="Título" [(ngModel)]="noticia.titulo" class="form-control" autofocus>
@@ -17,6 +18,9 @@
         <div class="form-group">
           <input type="text" name="autor" placeholder="Autor" [(ngModel)]="noticia.autor" class="form-control">
         </div>
+        <div class="form-group">
+          <input type="text" name="categoria" placeholder="Categoria" [(ngModel)]="noticia.categoria" class="form-control">
+        </div>
         <button class="btn btn-success btn-block" (click)="edit ? actualizarNoticia() : nuevaNoticia()"> GUARDAR </button>
       </form>
     </div>
@@ -24,9 +28,26 @@
 </div>
 <div class="col-md-4">
   <div class="card card-body text-center">
+    <!-- previsualizacion de noticia -->
     <img class="card-img-top" [src]="noticia.imagen == '' ? './assets/images/imagen-no-disponible.png' : noticia.imagen">
     <h2>{{ noticia.titulo == '' ? 'Titulo' : noticia.titulo }}</h2>
     <h3>{{ noticia.resumen == '' ? 'Resumen' : noticia.resumen }}</h3>
     <p>{{ noticia.cuerpo == '' ? 'Contenido' : noticia.cuerpo }}</p>
   </div>
 </div>
+
+<!-- visualizacion de comentarios-->
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="card" *ngFor="let comentario of comentarios">
+        <h5 class="card-header"> {{comentario.nombre}} </h5>
+          <div class="card-body">
+            <h5 class="card-title">{{comentario.correo}}</h5>
+            <p class="card-text">{{comentario.contenido}}</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

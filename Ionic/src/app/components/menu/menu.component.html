@@ -1,0 +1,21 @@
+<!-- LA BARRA DE NAVEGACIÒN (MENU) -->
+<ion-menu side="start" menuId="primerMenu" contentId="principal">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Categorías</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle *ngFor="let categoria of categorias | async">
+        <ion-item [routerLink]="categoria.redirectTo" detail>
+
+          <ion-icon slot="start" [name]="component.icon"></ion-icon>
+
+          <ion-label>{{ component.name }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

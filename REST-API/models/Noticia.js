@@ -35,6 +35,7 @@ const noticiaSchema = Schema({
     comentarios : {
         type: [{
             nombre: String,
+            correo: String,
             contenido: String
         }],
         required: true,
@@ -44,6 +45,10 @@ const noticiaSchema = Schema({
         type: Date,
         required: true,
         default: new Date()
+    },
+    categoria: {
+        type: String,
+        required: true
     }
 });
 

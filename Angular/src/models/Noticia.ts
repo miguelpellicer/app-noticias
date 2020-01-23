@@ -8,5 +8,6 @@ export interface Noticia {
   imagen?: string,
   autor: string,
   comentarios?: [Comentario],
-  created_at: Date
+  created_at: Date,
+  categoria: string
 }

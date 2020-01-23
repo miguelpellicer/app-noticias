@@ -9,6 +9,7 @@
 })
 export class NoticiaListaComponent implements OnInit {
 
+  //se crea un array donde se guardaran las noticias
   noticias : any = [];
   @HostBinding('class') classes = 'row';
 
@@ -16,6 +17,7 @@ export class NoticiaListaComponent implements OnInit {
 
 
   ngOnInit() {
+    //se cogen todas las noticias
     this.getNoticias();
   }
 
@@ -28,7 +30,10 @@ export class NoticiaListaComponent implements OnInit {
     },error => console.log(error));
   }
 
-
+  /**
+   * Método que elimina una noticia
+   * @param id
+   */
   eliminarNoticia(id: string) {
     this.noticiaService.deleteNoticia(id).subscribe( res =>{
       this.getNoticias();
