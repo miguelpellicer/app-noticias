@@ -10,7 +10,7 @@ import {NoticiaServiceService} from "../../Services/noticia-service.service";
 export class InicioPage implements OnInit {
 
   //array de las noticias
-  noticias : Noticia;
+  noticias : Noticia[];
   //un número para saber cuantas noticias tiene esa página (se usara en el infiniteScroll)
   perPage : number;
   //página que se esta solicitando (por defecto será la 1)
@@ -39,8 +39,8 @@ export class InicioPage implements OnInit {
   getNoticiaPage(page: number){
     this.noticiaService.getPage(page).subscribe( res =>{
       console.log(res);
-      this.noticias = <Noticia><unknown>res.noticias;
-      console.log('noticias' + this.noticias);
+      console.log(res.noticias[0]);
+      //TODO noticias = res.noticias
       this.perPage = res.thisPage;
       console.log('perPage:' + this.perPage);
     })
