@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Categoria } from '../../../Models/Categoria';
 
 @Component({
   selector: 'app-menu',
@@ -8,14 +9,41 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   //Se crea un array con las categorias
+  //cada categoria tiene un icono y donde se va a redirigir al apretar
 
-  categorias = [
-    'Economia',
-    'Sociedad',
-    'Medio Ambiente',
-    'Deporte',
-    'Ciencia'
+  categorias : Categoria[] = [
+    {
+      'icon' : 'paper',
+      'name' : 'inicio',
+      'redirectTo' : '/inicio'
+    },
+    {
+      'icon' : 'trending-up',
+      'name' : 'Economia',
+      'redirectTo' : '/economia'
+    },
+    {
+      'icon' : 'people',
+      'name' : 'Sociedad',
+      'redirectTo' : '/sociedad'
+    },
+    {
+      'icon' : 'leaf',
+      'name' : 'Medio Ambiente',
+      'redirectTo' : '/medioambiente'
+    },
+    {
+      'icon' : 'american-football',
+      'name' : 'Deporte',
+      'redirectTo' : '/deporte'
+    },
+    {
+      'icon' : 'flask',
+      'name' : 'Ciencia',
+      'redirectTo' : '/ciencia'
+    }
   ];
+
 
   constructor() { }
 

@@ -1,5 +1,5 @@
 <!-- LA BARRA DE NAVEGACIÒN (MENU) -->
-<ion-menu side="start" menuId="primerMenu" contentId="principal">
+<ion-menu side="start" menuId="menuNavegacion" contentId="principal">
   <ion-header>
     <ion-toolbar color="primary">
       <ion-title>Categorías</ion-title>
@@ -8,12 +8,12 @@
 
   <ion-content>
     <ion-list>
-      <ion-menu-toggle *ngFor="let categoria of categorias | async">
+      <ion-menu-toggle *ngFor="let categoria of categorias">
         <ion-item [routerLink]="categoria.redirectTo" detail>
 
-          <ion-icon slot="start" [name]="component.icon"></ion-icon>
+          <ion-icon slot="start" [name]="categoria.icon"></ion-icon>
 
-          <ion-label>{{ component.name }}</ion-label>
+          <ion-label>{{ categoria.name }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
     </ion-list>

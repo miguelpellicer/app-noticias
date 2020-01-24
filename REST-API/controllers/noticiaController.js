@@ -112,6 +112,26 @@ async function addComentario(req, res){
 
 }
 
+/**
+ * Método que te devuelve las noticias de 5 en 5 para el infinite scroll
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getNoticiasProgresivo(req, res){
+    const page = req.params.page;
+    const pnum = parseInt(page);
+    // para calcular cuantos elementos hay que saltarse la formula es la siguiente:
+    // (numPagina * 5) - 5
+    const skip = (pnum * 5) - 5;
+    const noticias = await Noticia.find().skip(skip).limit(5);
+    res.status(200).send(
+        {
+            page: pnum,
+            thisPage: noticias.length,
+            noticias: noticias
+        });
+}
 
 //Se exportan todos los metodos
 module.exports = {
@@ -120,5 +140,6 @@ module.exports = {
     addNoticia,
     updateNoticia,
     deleteNoticia,
-    addComentario
+    addComentario,
+    getNoticiasProgresivo
 };

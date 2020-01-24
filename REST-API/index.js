@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 
 // SE CONFIGURA CORS
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors());
 // SE CONFIGURAN LAS VARIABLES DE ENTORNO
 dotenv.config();
 
