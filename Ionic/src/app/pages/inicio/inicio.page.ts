@@ -31,6 +31,7 @@ export class InicioPage implements OnInit {
    */
   cargarNoticias(event?){
     this.noticiaService.getPage(this.page).subscribe( res => {
+      console.log(res);
       //se carga una pagina de la API
       this.noticias = this.noticias.concat(res['noticias']); //se concatenan las noticias al array de noticias
       // @ts-ignore
@@ -56,4 +57,5 @@ export class InicioPage implements OnInit {
     if (this.perPage < 5)
       event.target.disabled = true;
   }
+
 }
