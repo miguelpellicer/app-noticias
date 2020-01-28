@@ -8,7 +8,7 @@ const Noticia = require('../models/Noticia');
  */
 
 async function getAllNoticias(req, res) {
-    const noticias = await Noticia.find({});
+    const noticias = await Noticia.find({}).sort('-created_at');
 
     if (!noticias)
         return res.status(404).send('No hay noticias');
@@ -124,7 +124,7 @@ async function getNoticiasProgresivo(req, res){
     // para calcular cuantos elementos hay que saltarse la formula es la siguiente:
     // (numPagina * 5) - 5
     const skip = (pnum * 5) - 5;
-    const noticias = await Noticia.find().skip(skip).limit(5);
+    const noticias = await Noticia.find().skip(skip).limit(5).sort('-created_at');
     res.status(200).send(
         {
             page: pnum,
