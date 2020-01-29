@@ -2,7 +2,7 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let noticia of noticias" button="true" color="light">
+  <ion-card *ngFor="let noticia of noticias" button="true" color="light" (click)="verNoticia(noticia._id)">
     <ion-img [src]="noticia.imagen" alt="https://pbs.twimg.com/profile_images/523318915758575617/O0fgYUL5.jpeg"></ion-img>
     <ion-card-header>
       <ion-card-title>{{noticia.titulo}}</ion-card-title>

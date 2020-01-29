@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Noticia} from "../../../Models/Noticia";
 import {NoticiaServiceService} from "../../Services/noticia-service.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-categoria',
@@ -19,7 +19,7 @@ export class CategoriaPage implements OnInit {
   //la categoria que se va a buscar
   categoria : string;
 
-  constructor(private noticiaService: NoticiaServiceService,  private activatedRoute: ActivatedRoute) { }
+  constructor(private noticiaService: NoticiaServiceService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
@@ -60,6 +60,14 @@ export class CategoriaPage implements OnInit {
     //Si la página actual tiene menos de 5 elementos se desactiva el infiniteScroll porque ya no hay mas noticias
     if (this.perPage < 5)
       event.target.disabled = true;
+  }
+
+  /**
+   * metodo que dado una id va a la pagina de esa noticia
+   * @param id
+   */
+  verNoticia(id: string) {
+    this.router.navigate([`/noticia/${id}`]);
   }
 
 }

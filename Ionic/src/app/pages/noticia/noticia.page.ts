@@ -11,6 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 export class NoticiaPage implements OnInit {
 
   noticia: Noticia;
+  titulo: string = "cargando"; //fijo un texto por defecto para que se cambie luego cuando ya tengo la noticia cargada
 
   constructor(private noticiaService: NoticiaServiceService,  private activatedRoute: ActivatedRoute) { }
 
@@ -27,7 +28,7 @@ export class NoticiaPage implements OnInit {
   getNoticia(id:string){
     this.noticiaService.getNoticia(id).subscribe(res => {
       this.noticia = <Noticia>res;
-      console.log(this.noticia)
+      this.titulo = this.noticia.titulo; //asigno el titulo de la noticia al titulo de la pagina
     });
   }
 
