@@ -40,8 +40,13 @@ export class NoticiaServiceService {
     return this.http.put(`${this.API_URI}/noticia/comentario/${idNoticia}`, comentario);
   }
 
-  //metooo que dado un numrero de pagina devuelve esa página
+  //metooo que dado un numero de pagina devuelve esa página
   getPage(pagina : number){
     return this.http.get(`${this.API_URI}/noticia/page/${pagina}`);
+  }
+
+  //metodo que dado un numero de pagina y una categoria devuelve una página con noticias de ese tipo
+  getPageCategory(pagina : number, categoria: string){
+    return this.http.get(`${this.API_URI}/noticia/page/${pagina}/${categoria}`);
   }
 }

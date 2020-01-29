@@ -10,6 +10,7 @@ router.put('/:id', noticiaController.updateNoticia);
 router.delete('/:id', noticiaController.deleteNoticia);
 router.put('/comentario/:idnoticia', noticiaController.addComentario);
 router.get('/page/:page', noticiaController.getNoticiasProgresivo);
+router.get('/page/:page/:categoria', noticiaController.getNoticiasProgresivoCategoria);
 
 
 module.exports = router;

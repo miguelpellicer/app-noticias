@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Noticia} from "../../../Models/Noticia";
 import {NoticiaServiceService} from "../../Services/noticia-service.service";
-import {Router} from "@angular/router";
-
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.page.html',
-  styleUrls: ['./inicio.page.scss'],
+  selector: 'app-categoria',
+  templateUrl: './categoria.page.html',
+  styleUrls: ['./categoria.page.scss'],
 })
-export class InicioPage implements OnInit {
+export class CategoriaPage implements OnInit {
 
   //array de las noticias
   noticias : Noticia[] = [];
@@ -17,25 +16,30 @@ export class InicioPage implements OnInit {
   perPage : number;
   //página que se esta solicitando (por defecto será la 1)
   page : number = 1;
+  //la categoria que se va a buscar
+  categoria : string;
 
-
-  constructor(private noticiaService: NoticiaServiceService, private router: Router) { }
+  constructor(private noticiaService: NoticiaServiceService,  private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarNoticias();
+    const params = this.activatedRoute.snapshot.params;
+    this.categoria = params.categoria;
+    //se captura la categoria que intentan acceder
+    this.cargarNoticias()
   }
 
   /**
-   * Método para cargar una página de noticias
-   *
-   * el evento es opcional porque la primera vez no lo recibe pero el resto si
+   * Metodo que carga las noticias de cierta categoria
+   * @param event
    */
   cargarNoticias(event?){
-    this.noticiaService.getPage(this.page).subscribe( res => {
+    this.noticiaService.getPageCategory(this.page, this.categoria).subscribe( res => {
       //se carga una pagina de la API
       this.noticias = this.noticias.concat(res['noticias']); //se concatenan las noticias al array de noticias
       // @ts-ignore
       this.perPage = res.thisPage; //se guardan las noticias que haya en la pagina actual
+
+      console.log(res);
 
       //si hay evento lo marca como completado una vez ha hecho lo necesario
       if (event){
@@ -58,11 +62,4 @@ export class InicioPage implements OnInit {
       event.target.disabled = true;
   }
 
-  /**
-   * metodo que dado una id va a la pagina de esa noticia
-   * @param id
-   */
-  verNoticia(id: string) {
-    this.router.navigate([`/noticia/${id}`]);
-  }
 }

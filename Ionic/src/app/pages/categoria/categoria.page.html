@@ -1,8 +1,8 @@
-<app-header titulo="Inicio"></app-header>
+<app-header [titulo]="categoria"></app-header><!-- se manda la categoria al titulo-->
 
-<!-- El contenido consiste en una card con una imagen, titulo, autor y subtitulo, se repite por cada noticia que exista-->
+
 <ion-content>
-  <ion-card *ngFor="let noticia of noticias" button="true" color="light" (click)="verNoticia(noticia._id)">
+  <ion-card *ngFor="let noticia of noticias" button="true" color="light">
     <ion-img [src]="noticia.imagen" alt="https://pbs.twimg.com/profile_images/523318915758575617/O0fgYUL5.jpeg"></ion-img>
     <ion-card-header>
       <ion-card-title>{{noticia.titulo}}</ion-card-title>
@@ -11,7 +11,6 @@
     <ion-card-content>{{noticia.resumen}}</ion-card-content>
   </ion-card>
 
-  <!-- cuando las noticias esten a un 25% de la pantalla de acabarse se cargan 5 mas-->
   <ion-infinite-scroll threshold="25%" (ionInfinite)="cargarMas($event)">
     <ion-infinite-scroll-content loading-spinner="dots" loading-text="cargando"></ion-infinite-scroll-content>
   </ion-infinite-scroll>

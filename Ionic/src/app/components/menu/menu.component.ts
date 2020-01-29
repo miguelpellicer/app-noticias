@@ -15,32 +15,32 @@ export class MenuComponent implements OnInit {
     {
       'icon' : 'paper',
       'name' : 'inicio',
-      'redirectTo' : '/inicio'
+      'redirectTo' : '/noticias'
     },
     {
       'icon' : 'trending-up',
       'name' : 'Economia',
-      'redirectTo' : '/economia'
+      'redirectTo' : '/noticias/economia'
     },
     {
       'icon' : 'people',
       'name' : 'Sociedad',
-      'redirectTo' : '/sociedad'
+      'redirectTo' : '/noticias/sociedad'
     },
     {
       'icon' : 'leaf',
       'name' : 'Medio Ambiente',
-      'redirectTo' : '/medioambiente'
+      'redirectTo' : '/noticias/medioambiente'
     },
     {
       'icon' : 'american-football',
       'name' : 'Deporte',
-      'redirectTo' : '/deporte'
+      'redirectTo' : '/noticias/deporte'
     },
     {
       'icon' : 'flask',
       'name' : 'Ciencia',
-      'redirectTo' : '/ciencia'
+      'redirectTo' : '/noticias/ciencia'
     }
   ];
 

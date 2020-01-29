@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InicioPageRoutingModule } from './inicio-routing.module';
+import { CategoriaPageRoutingModule } from './categoria-routing.module';
 
-import { InicioPage } from './inicio.page';
+import { CategoriaPage } from './categoria.page';
 import {ComponentModule} from "../../components/component.module";
 
 @NgModule({
@@ -14,9 +14,9 @@ import {ComponentModule} from "../../components/component.module";
         CommonModule,
         FormsModule,
         IonicModule,
-        InicioPageRoutingModule,
+        CategoriaPageRoutingModule,
         ComponentModule
     ],
-  declarations: [InicioPage]
+  declarations: [CategoriaPage]
 })
-export class InicioPageModule {}
+export class CategoriaPageModule {}

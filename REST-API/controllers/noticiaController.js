@@ -133,6 +133,28 @@ async function getNoticiasProgresivo(req, res){
         });
 }
 
+/**
+ * Método que te devuelve noticias de 5 en 5 pertenecientes a una categoria en especifico
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+async function getNoticiasProgresivoCategoria(req, res){
+    const page = req.params.page;
+    const pnum = parseInt(page);
+    const categoria = req.params.categoria;
+    // para calcular cuantos elementos hay que saltarse la formula es la siguiente:
+    // (numPagina * 5) - 5
+    const skip = (pnum * 5) - 5;
+    const noticias = await Noticia.find({categoria : categoria}).skip(skip).limit(5).sort('-created_at');
+    res.status(200).send(
+        {
+            page: pnum,
+            thisPage: noticias.length,
+            noticias: noticias
+        });
+}
+
 //Se exportan todos los metodos
 module.exports = {
     getAllNoticias,
@@ -141,5 +163,6 @@ module.exports = {
     updateNoticia,
     deleteNoticia,
     addComentario,
-    getNoticiasProgresivo
+    getNoticiasProgresivo,
+    getNoticiasProgresivoCategoria
 };

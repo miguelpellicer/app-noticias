@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 import {MenuComponent} from "./menu/menu.component";
 import {RouterModule} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
+import {HeaderComponent} from "./header/header.component";
 
 
 
 @NgModule({
   declarations: [
-      MenuComponent
+      MenuComponent,
+      HeaderComponent
   ],
   exports: [
-      MenuComponent
+      MenuComponent,
+      HeaderComponent
   ],
   imports: [
     CommonModule,
