@@ -39,7 +39,6 @@ export class CategoriaPage implements OnInit {
       // @ts-ignore
       this.perPage = res.thisPage; //se guardan las noticias que haya en la pagina actual
 
-      console.log(res);
 
       //si hay evento lo marca como completado una vez ha hecho lo necesario
       if (event){

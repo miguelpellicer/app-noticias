@@ -24,20 +24,9 @@ export class NoticiaServiceService {
     return this.http.get(`${this.API_URI}/noticia/${id}`);
   }
 
-  saveNoticia(noticia: Noticia){
-    return this.http.post(`${this.API_URI}/noticia`, noticia);
-  }
-
-  updateNoticia(id: string, noticia: Noticia){
-    return this.http.put(`${this.API_URI}/noticia/${id}`, noticia);
-  }
-
-  deleteNoticia(id: string){
-    return this.http.delete(`${this.API_URI}/noticia/${id}`);
-  }
-
+  //metodo que añade un comentario a una noticia
   addComentario(comentario: Comentario, idNoticia: string){
-    return this.http.put(`${this.API_URI}/noticia/comentario/${idNoticia}`, comentario);
+    return this.http.put(`${this.API_URI}/noticia/comentario/${idNoticia}`,comentario);
   }
 
   //metooo que dado un numero de pagina devuelve esa página

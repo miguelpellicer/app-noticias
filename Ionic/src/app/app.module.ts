@@ -10,15 +10,17 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {ComponentModule} from "./components/component.module";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ComponentModule],
   providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+      InAppBrowser,
+      StatusBar,
+      SplashScreen,
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

@@ -95,7 +95,7 @@ async function deleteNoticia(req, res){
  * @param res
  */
 async function addComentario(req, res){
-    noticia = await Noticia.findOne({_id: req.params.idnoticia});
+    noticia = await Noticia.findOne({_id: req.params.idNoticia});
     if (!noticia)
         return res.status(404).send({message: 'Esa noticia no existe'});
 
@@ -104,7 +104,9 @@ async function addComentario(req, res){
         correo: req.body.correo,
         contenido : req.body.contenido
     };
+
     let comentarios = noticia.comentarios;
+
     comentarios.push(comentario);
     comentariosActualizados = await Noticia.updateOne({_id : noticia._id}, {$set : { comentarios: comentarios}});
     res.status(200).send({message: 'Comentario agregado con exito'});
